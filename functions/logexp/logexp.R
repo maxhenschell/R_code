@@ -1,12 +1,10 @@
-# Logistical Exposure Link Function
+# Logistic Exposure Link Function
 # See Shaffer, T.  2004. A unifying approach to analyzing nest success. 
 # Auk 121(2): 526-540.
 library(MASS)
 logexp <- function(exposure = 1)
 {
     linkfun <- function(mu) qlogis(mu^(1/exposure))
-    ## FIXME: is there some trick we can play here to allow
-    ##   evaluation in the context of the 'data' argument?
     linkinv <- function(eta)  plogis(eta)^exposure
     mu.eta <- function(eta) exposure * plogis(eta)^(exposure-1) *
       .Call(stats:::C_logit_mu_eta, eta, PACKAGE = "stats")
